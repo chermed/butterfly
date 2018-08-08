@@ -1,7 +1,7 @@
 # *-* coding: utf-8 *-*
 # This file is part of butterfly
 #
-# butterfly Copyright (C) 2015  Florian Mounier
+# butterfly Copyright(C) 2015-2017 Florian Mounier
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,14 +14,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-__version__ = '2.0.3'
-
+from .__about__ import *  # noqa: F401,F403
 
 import os
 import tornado.web
 import tornado.options
 import tornado.web
 from logging import getLogger
+
 
 log = getLogger('butterfly')
 
@@ -46,12 +46,17 @@ class Route(tornado.web.RequestHandler):
     @property
     def builtin_themes_dir(self):
         return os.path.join(
-                os.path.dirname(__file__), 'themes')
+            os.path.dirname(__file__), 'themes')
 
     @property
     def themes_dir(self):
         return os.path.join(
             self.application.butterfly_dir, 'themes')
+
+    @property
+    def local_js_dir(self):
+        return os.path.join(
+            self.application.butterfly_dir, 'js')
 
     def get_theme_dir(self, theme):
         if theme.startswith('built-in-'):
@@ -72,4 +77,4 @@ if hasattr(tornado.options.options, 'debug'):
             if tornado.options.options.uri_root_path else '')
     )
 
-    import butterfly.routes
+    import butterfly.routes  # noqa: F401

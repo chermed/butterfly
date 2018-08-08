@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FROM ubuntu:14.04.4
+=======
+FROM ubuntu:16.04
+>>>>>>> upstream/master
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
@@ -7,6 +11,12 @@ RUN apt-get update \
     libssl-dev \
     python-dev \
     python-setuptools \
+<<<<<<< HEAD
+=======
+    ca-certificates \
+ && easy_install pip \
+ && pip install --upgrade setuptools \
+>>>>>>> upstream/master
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
 
